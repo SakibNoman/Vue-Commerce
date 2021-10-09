@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 
+
 </head>
 
 <body>
@@ -29,19 +30,40 @@
         </nav>
 
         <div class="row mx-0">
-            <div class="col-md-2 border-end">
-                <h1>Hello</h1>
+            <div class="col-md-2 border-end mt-5">
+                <b>Price</b>
+                <small @click="filterWithPrice(0,25)" class="d-block"> Under $25</small>
+                <small @click="filterWithPrice(25,50)" class="d-block"> $25 to $50</small>
+                <small @click="filterWithPrice(50,100)" class="d-block"> $50 to $100</small>
+                <b>Rating</b>
+                <div>
+                    <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=1
+                        @click="filterWithRating(1)" />
+                </div>
+                <div>
+                    <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=2
+                        @click="filterWithRating(2)" />
+                </div>
+                <div>
+                    <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=3
+                        @click="filterWithRating(3)" />
+                </div>
+                <div>
+                    <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=4
+                        @click="filterWithRating(4)" />
+                </div>
             </div>
             <div class="col-md-10">
                 <div class="container">
                     <div class="row gap-2 justify-content-center mt-5">
+                        <!-- <h4>Showing results for : {{h}} </h4> -->
                         <div v-for="product in products" class="card" style="width: 18rem;">
                             <img :src="product.img" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h6 class="card-title">{{product.name}}</h6>
                                 <p class="card-text">
                                     <star-rating read-only="true" v-bind:show-rating="false"
-                                        v-bind:rating="product.star" star-size="20" v-model:rating="rating">
+                                        v-bind:rating="product.star" star-size=20 v-model:rating="rating">
                                     </star-rating>
                                 <p><b>${{product.price}}</b> </p>
                                 </p>

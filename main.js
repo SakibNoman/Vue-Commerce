@@ -1,8 +1,7 @@
-const mainProducts = ['Apple', 'Google', 'Amazon', 'Facebook', 'WhatsApp']
 const app = Vue.createApp({
     data() {
         return {
-            products: mainProducts,
+            products: null,
             filterValue: '',
             json: null
 
@@ -11,12 +10,20 @@ const app = Vue.createApp({
     methods: {
         onSubmit() {
             if (this.filterValue.length > 0) {
-                const filteredProduct = mainProducts.filter(each => each.toLowerCase().includes(this.filterValue.toLowerCase()))
+                const filteredProduct = this.json.filter(each => each.name.toLowerCase().includes(this.filterValue.toLowerCase()))
                 this.products = filteredProduct;
             }
             else {
-                this.products = mainProducts;
+                this.products = this.json;
             }
+        },
+        filterWithRating(star) {
+            const filteredProduct = this.json.filter(each => each.star >= star)
+            this.products = filteredProduct;
+        },
+        filterWithPrice(minPrice, maxPrice) {
+            const filteredProduct = this.json.filter(each => each.price >= minPrice && each.price <= maxPrice)
+            this.products = filteredProduct;
         }
     },
     created: function () {
