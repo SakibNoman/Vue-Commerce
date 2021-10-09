@@ -29,10 +29,10 @@
         </nav>
 
         <div class="row mx-0">
-            <div class="col-md-3">
+            <div class="col-md-2 border-end">
                 <h1>Hello</h1>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <div class="container">
                     <div class="row gap-2 justify-content-center mt-5">
                         <div v-for="product in products" class="card" style="width: 18rem;">
@@ -40,7 +40,10 @@
                             <div class="card-body">
                                 <h6 class="card-title">{{product.name}}</h6>
                                 <p class="card-text">
-
+                                    <star-rating read-only="true" v-bind:show-rating="false"
+                                        v-bind:rating="product.star" star-size="20" v-model:rating="rating">
+                                    </star-rating>
+                                <p><b>${{product.price}}</b> </p>
                                 </p>
                             </div>
                         </div>
@@ -53,8 +56,12 @@
             {{product}}
         </div>
     </div>
-
     <script src="./main.js"></script>
+    <script src="https://unpkg.com/vue-star-rating@next/dist/VueStarRating.umd.min.js"></script>
+    <script>
+        const mountApp = app.mount("#app")
+        app.component('star-rating', VueStarRating.default)
+    </script>
 </body>
 
 </html>
