@@ -22,7 +22,7 @@
                 <div class="">
                     <form class="d-flex" @submit.prevent="onSubmit">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                            v-model="filterValue">
+                            v-model="searchValue">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
@@ -36,27 +36,37 @@
                 <small @click="filterWithPrice(25,50)" class="d-block"> $25 to $50</small>
                 <small @click="filterWithPrice(50,100)" class="d-block"> $50 to $100</small>
                 <b>Rating</b>
-                <div>
-                    <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=1
-                        @click="filterWithRating(1)" />
+                <div class="d-flex " @click="filterWithRating(1)">
+                    <div>
+                        <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=1 />
+                    </div>
+                    <div><small><b>& up</b></small></div>
                 </div>
-                <div>
-                    <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=2
-                        @click="filterWithRating(2)" />
+                <div class="d-flex" @click="filterWithRating(2)">
+                    <div>
+                        <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=2 />
+                    </div>
+                    <div><small><b>& up</b></small></div>
                 </div>
-                <div>
-                    <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=3
-                        @click="filterWithRating(3)" />
+                <div class="d-flex" @click="filterWithRating(3)">
+                    <div>
+                        <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=3 />
+                    </div>
+                    <div><small><b>& up</b></small></div>
                 </div>
-                <div>
-                    <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=4
-                        @click="filterWithRating(4)" />
+                <div class="d-flex" @click="filterWithRating(4)">
+                    <div>
+                        <star-rating read-only="true" v-bind:show-rating="false" star-size=20 rating=4 />
+                    </div>
+                    <div><small><b>& up</b></small></div>
                 </div>
             </div>
             <div class="col-md-10">
                 <div class="container">
                     <div class="row gap-2 justify-content-center mt-5">
-                        <!-- <h4>Showing results for : {{h}} </h4> -->
+                        <h4 v-if="showFilterMsg">Found <b>{{products.length}}</b> products for <b>{{filterValue}}</b>
+                            <button @click="clearFilter" class="btn btn-sm btn-danger mx-3">Clear filter</button>
+                        </h4>
                         <div v-for="product in products" class="card" style="width: 18rem;">
                             <img :src="product.img" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -72,10 +82,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div v-for="product in products">
-            {{product}}
         </div>
     </div>
     <script src="./main.js"></script>
